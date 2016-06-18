@@ -12,9 +12,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   $rootScope.tabHide = false;
 
   //ionic view event
-  //$rootScope.on("$ionicView.beforeEnter", function(){
-  //  alert("beforeEnter");
-  //})
+  $rootScope.$on("$ionicView.beforeEnter", function(){
+    alert("beforeEnter");
+  })
 
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

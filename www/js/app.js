@@ -7,14 +7,21 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$rootScope) {
+  //tabHide지정 후 기본은 false
+  $rootScope.tabHide = false;
+
+  //ionic view event
+  //$rootScope.on("$ionicView.beforeEnter", function(){
+  //  alert("beforeEnter");
+  //})
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       cordova.plugins.Keyboard.disableScroll(true);
-
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
@@ -34,7 +41,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
-    abstract: true,
+    abstract: true, //추상화 페이지라 접근 불가능함
     templateUrl: 'templates/tabs.html'
   })
 
@@ -106,6 +113,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
+
+  //기본시작할때 경로
   $urlRouterProvider.otherwise('/tab/dash');
 
 });

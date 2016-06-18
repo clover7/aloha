@@ -1,7 +1,8 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, Videos) {
   console.log("DashCtrl");
+  $scope.items = Videos.all();
 })
 
   .controller('TodoCtrl', function($scope) {
@@ -9,7 +10,6 @@ angular.module('starter.controllers', [])
   })
   .controller('VideoCtrl', function($scope, Videos) {
     $scope.items = Videos.all();
-
     $scope.remove = function(video) {
       Videos.remove(video);
     };
@@ -42,4 +42,5 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     enableFriends: true
   };
+
 });

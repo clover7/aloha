@@ -5,10 +5,10 @@
   <ion-content>
     <!-- The list directive is great, but be sure to also checkout the collection repeat directive when scrolling through large lists -->
     <ion-list show-delete="data.showDelete" show-reorder="data.showReorder">
+
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="item in items" type="item-text-wrap"
                 item="item"
                 href="#/tab/videos/{{item.id}}" class="item-remove-animate">
-
         <ion-delete-button class="ion-minus-circled button-assertive"></ion-delete-button>
 
         <img ng-src="{{item.face}}">

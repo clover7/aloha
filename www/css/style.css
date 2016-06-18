@@ -1,1 +1,40 @@
 /* Empty. Add your own CSS if you like */
+li.msg {
+  padding: 10px;
+  position: relative;
+  float: left;
+  width: 70%;
+  margin: 5px;
+}
+li.my.msg {
+  float: right;
+  background:#80CBC4;
+}
+
+li.you {
+  background:#CFD8DC;
+  margin-left: 20px;
+}
+
+li.you.msg::after {
+  border-top:7px solid #CFD8DC;
+  border-right:7px solid #CFD8DC;
+  border-left:7px solid transparent;
+  border-bottom:7px solid transparent;
+  left:-7px;
+}
+li.my.msg::after {
+  border-top:7px solid #80CBC4;
+  border-right:7px solid transparent;
+  border-left:7px solid #80CBC4;
+  border-bottom:7px solid transparent;
+  right:-7px;
+}
+
+li.msg::after{
+  content: "";
+  position: absolute;
+  display: block;
+  top:0;
+
+}

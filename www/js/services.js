@@ -63,61 +63,75 @@ angular.module('starter.services', [])
 
 
   .factory('Videos', function () {
+
+    //var itemsRef = new Firebase("https://Aloha.firebaseio.com/items");
+    //return $firebaseArray(itemsRef);
     var videos = [{
       id: 0,
       name: 'Ben Sparrow',
       lastText: 'You on your way?',
-      face: 'img/001.gif'
+      face: 'img/001.gif'  ,
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 1,
       name: 'Max Lynx',
       lastText: 'Hey, it\'s me',
-      face: 'img/002.gif'
+      face: 'img/002.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 2,
       name: 'Adam Bradleyson',
       lastText: 'I should buy a boat',
-      face: 'img/003.gif'
+      face: 'img/003.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 3,
       name: 'Perry Governor',
       lastText: 'Look at my mukluks!',
-      face: 'img/004.gif'
+      face: 'img/004.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 4,
       name: 'Mike Harrington',
       lastText: 'This is wicked good ice cream.',
-      face: 'img/005.gif'
+      face: 'img/005.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 5,
       name: 'Mike Harrington',
       lastText: 'This is wicked good ice cream.',
-      face: 'img/006.gif'
+      face: 'img/006.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 6,
       name: 'Mike Harrington',
       lastText: 'This is wicked good ice cream.',
-      face: 'img/007.gif'
+      face: 'img/007.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 7,
       name: 'Mike Harrington',
       lastText: 'This is wicked good ice cream.',
-      face: 'img/008.gif'
+      face: 'img/008.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 8,
       name: 'Mike Harrington',
       lastText: 'This is wicked good ice cream.',
-      face: 'img/009.gif'
+      face: 'img/009.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 9,
       name: 'Mike Harrington',
       lastText: 'This is wicked good ice cream.',
-      face: 'img/010.gif'
+      face: 'img/010.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }, {
       id: 10,
       name: 'Mike Harrington',
       lastText: 'This is wicked good ice cream.',
-      face: 'img/011.gif'
+      face: 'img/011.gif',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }];
 
     return {
@@ -126,6 +140,24 @@ angular.module('starter.services', [])
       },
       remove: function (video) {
         videos.splice(videos.indexOf(video), 1);
+      },
+      write: function ($http, todo) {
+        console.log("todo write:" + todo);
+        todo.createDate = new Date();
+        $scope.items.$add({
+          "name": name
+        });
+
+
+        var promise = $http({
+          url: "https://api.mlab.com/api/1/databases/angular/collections/todos",
+          method: "POST",
+          params: {
+            "apiKey": "0m3TAU3qpXHvc9LRN5JgYSCuZbvKS5N6"
+          },
+          data: todo //서버로 넘길 데이터
+        });
+        return promise;
       },
       get: function (videoId) {
         for (var i = 0; i < videos.length; i++) {
@@ -146,27 +178,32 @@ angular.module('starter.services', [])
       id: 0,
       name: 'Ben Sparrow',
       lastText: 'You on your way?',
-      face: 'img/ben.png'
+      face: 'img/ben.png',
+      date: new Date()
     }, {
       id: 1,
       name: 'Max Lynx',
       lastText: 'Hey, it\'s me',
-      face: 'img/max.png'
+      face: 'img/max.png',
+      date: new Date()
     }, {
       id: 2,
       name: 'Adam Bradleyson',
       lastText: 'I should buy a boat',
-      face: 'img/adam.jpg'
+      face: 'img/adam.jpg',
+      date: new Date()
     }, {
       id: 3,
       name: 'Perry Governor',
       lastText: 'Look at my mukluks!',
-      face: 'img/perry.png'
+      face: 'img/perry.png',
+      date: new Date()
     }, {
       id: 4,
       name: 'Mike Harrington',
       lastText: 'This is wicked good ice cream.',
-      face: 'img/mike.png'
+      face: 'img/mike.png',
+      date: new Date('Sun Jun 19 2016 02:10:19 GMT+0900 (KST)')
     }];
 
     return {

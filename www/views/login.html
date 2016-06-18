@@ -7,7 +7,7 @@
       <!--&lt;!&ndash;</i>&ndash;&gt;-->
       <!---->
     <!--</div>-->
-    <img src="../img/002.gif" class="full-size">
+    <img src="img/002.gif">
     <form id="login-form1" class="list ">
       <ion-list id="login-list1" class=" ">
         <label class="item item-input " id="login-input1">
@@ -20,7 +20,9 @@
         </label>
       </ion-list>
       <div class="spacer" style="height: 40px;"></div>
-      <a ui-sref="page" id="login-button1" class=" button button-stable  button-block " on-touch="moveMain()">Log in</a>
+      <a href="#/tab/dash" id="login-button1"
+         class=" button button-positive  button-block "
+         >Log in</a>
       <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2"
          class=" button button-positive  button-block button-clear ">Or create an account</a>
     </form>

@@ -1,4 +1,4 @@
-var app = angular.module('starter.controllers', [])
+var app = angular.module('starter.controllers', ['firebase'])
 
 app.controller('LoginCtrl', function ($scope, $state) {
     console.log("LoginCtrl");
@@ -12,6 +12,21 @@ app.controller('LoginCtrl', function ($scope, $state) {
   .controller('TodoCtrl', function ($scope, $http, Todos, $ionicLoading, $ionicPopup, $ionicModal) {
     console.log("TodoCtrl");
     $ionicLoading.show();
+
+    function Todo(data){
+      this._id = data._id;
+      this.title = data.title;
+      this.end = data.end;
+      this.createDate = data.createDate;
+      this.updateDate = data.updateDate;
+      //$$hashKey: "object:57"
+      //_id: {$oid: "57655ef1c2ef161e70adae0e"}
+      //createDate: "2016-06-18T16:12:12.695Z"
+      //end: false
+      //title: "1234"
+      //updateDate: "2016-06-18T16:12:46.620Z"
+      //Object 견본
+    }
     function readTodo(){
       var data = Todos.all($http);
       console.log(data);
@@ -30,8 +45,12 @@ app.controller('LoginCtrl', function ($scope, $state) {
 
     $scope.updateTodo = function (todo) {
       console.log(todo);
+      todo.updateDate = new Date();
+      //todo.id = todo._id.$oid;
+      var setTodo = new Todo(todo);
+
       $ionicLoading.show();
-      var updated = Todos.update($http, todo);
+      var updated = Todos.update($http, setTodo);
       updated.error(function (data, status, header, config) {
         $ionicLoading.hide();
         console.log("error : " + status + " /" + data);
@@ -74,15 +93,19 @@ app.controller('LoginCtrl', function ($scope, $state) {
       console.log("writeTodo1 : " + todo);
       //todo = new Todos(todo);
 
-      var title = todo;
-      //console.log("writeTodo : " + title);
+      todo.createDate = new Date();
+      todo.updateDate = new Date();
+      todo.end = false;
+      var setTodo = new Todo(todo);
 
+      var title = setTodo.title;
+      //console.log("writeTodo : " + title);
       if(title == undefined){
         alert("please input todo");
         $scope.title = "";
       }else{
         //var todo = {"title":title, "end":false};
-        var writeDone = Todos.write($http, todo);
+        var writeDone = Todos.write($http, setTodo);
         writeDone.error(function (data, status, header, config) {
           $ionicLoading.hide();
           alert("error : " + status + " /" + data);
@@ -91,11 +114,10 @@ app.controller('LoginCtrl', function ($scope, $state) {
           $ionicLoading.hide();
           $scope.closeModal();
           console.log("success : " + status + " /" + data);
-
           readTodo();
+          $scope.title = "";
         });
       }
-      $scope.title = "";
     }
 
     var baseUrl = "views/todoWrite.html";
@@ -117,15 +139,69 @@ app.controller('LoginCtrl', function ($scope, $state) {
     };
   })
 
-  .controller('VideoCtrl', function ($scope, Videos) {
+  .controller('VideoCtrl', function ($scope, Videos, $firebaseArray) {
     $scope.items = Videos.all();
     $scope.remove = function (video) {
       Videos.remove(video);
     };
+
+    var messagesRef = new Firebase("https://aloha-651ec.firebaseio.com/aloha");
+    // download the data from a Firebase reference into a (pseudo read-only) array
+    // all server changes are applied in realtime
+    $scope.messages = $firebaseArray(messagesRef);
+    // create a query for the most recent 25 messages on the server
+    var query = messagesRef.orderByChild("timestamp").limitToLast(25);
+    // the $firebaseArray service properly handles database queries as well
+    $scope.filteredMessages = $firebaseArray(query);
+
+
+    var airportsRef = new Firebase("https://publicdata-airports.firebaseio.com/");
+    airportsRef.child("SFO").on("value", delayInfo);
+    function delayInfo(snapshot) {
+      var airport = snapshot.val();
+      console.log("Delay: " + airport.delay + " reason: " + airport.status.reason);
+    }
+
   })
 
-  .controller('VideoDetailCtrl', function ($scope, $stateParams, Videos) {
+  .controller('VideoDetailCtrl', function ($scope, $stateParams, Videos, $ionicScrollDelegate) {
     $scope.item = Videos.get($stateParams.itemId);
+    //
+    //function($scope, $ionicHistory, $firebaseArray, $cordovaCamera, $firebase, $ionicScrollDelegate) {
+    //
+    //  $ionicHistory.clearHistory();
+    //
+
+    var message = $scope.myMessage;
+    console.log(message);
+
+    function Talk(message) {
+      this.message = message;
+      this.date = new Date();
+    }
+    $scope.Lists = [];
+
+    $scope.sendMessage = function(msg){
+      //console.log("$scope.msg : " + msg.my); SD
+      var newMessage = msg.my;
+      if(newMessage == undefined){
+        alert("please input message");
+        $scope.msg.my = "";
+      }else{
+        //var date = new Date();
+        $scope.messageClass = "msg my";
+        //class="msg my"
+        //var getDate = $filter('date')(new Date(), 'MMM d, y h:mm a');
+        //var html = "<p>" + newMessage + "</p>";
+        //html += "<p class='right date'>"+ getDate +"</p>";
+        //console.log(html);
+        var setNewTalk = new Talk(newMessage);
+        $scope.Lists.push(setNewTalk);
+        console.log(setNewTalk);
+      }
+      $scope.msg.my = "";
+      $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom();
+    }
   })
 
   .controller('ChatsCtrl', function ($scope, Chats) {

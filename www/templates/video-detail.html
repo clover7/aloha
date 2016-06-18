@@ -16,55 +16,75 @@
       width: 70%;
       margin: 5px;
     }
+
     li.my.msg {
       float: right;
-      background:#80CBC4;
+      background: #80CBC4;
     }
 
     li.you {
-      background:#CFD8DC;
+      background: #CFD8DC;
       margin-left: 20px;
     }
 
     li.you.msg::after {
-      border-top:7px solid #CFD8DC;
-      border-right:7px solid #CFD8DC;
-      border-left:7px solid transparent;
-      border-bottom:7px solid transparent;
-      left:-7px;
-    }
-    li.my.msg::after {
-      border-top:7px solid #80CBC4;
-      border-right:7px solid transparent;
-      border-left:7px solid #80CBC4;
-      border-bottom:7px solid transparent;
-      right:-7px;
+      border-top: 7px solid #CFD8DC;
+      border-right: 7px solid #CFD8DC;
+      border-left: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      left: -7px;
     }
 
-    li.msg::after{
+    li.my.msg::after {
+      border-top: 7px solid #80CBC4;
+      border-right: 7px solid transparent;
+      border-left: 7px solid #80CBC4;
+      border-bottom: 7px solid transparent;
+      right: -7px;
+    }
+
+    li.msg::after {
       content: "";
       position: absolute;
       display: block;
-      top:0;
+      top: 0;
+    }
+
+    p.date {
+      color: #8f8f8f;
+      font-size: 8pt;
+      text-align: right;
+      margin: 0px;
+      padding: 0px 10px 0px 0px;
     }
   </style>
 
-  <ion-content class="padding">
+  <ion-content class="padding" delegate-handle="chatScroll">
     <ul>
       <li class="msg you">
         <img ng-src="{{item.face}}" style="width: 64px; height: 64px">
         <p>
           {{item.lastText}}
         </p>
-        hi
+        <p>hi</p>
+        <p class="right date">{{item.date|date:"MMM d, y h:mm a"}}</p>
       </li>
-      <li class="msg my">Aloha</li>
-    </ul>
+      <li class="msg my">
+        <p>Aloha</p>
+        <p class="right date">{{item.date|date:"MMM d, y h:mm a"}}</p>
+      </li>
+      </ul>
+      <ul>
+        <li ng-repeat="newMsg in Lists" ng-class="messageClass" >
+          <p>{{newMsg.message}}</p>
+          <p class="right date">{{newMsg.date|date:"MMM d, y h:mm a"}}</p>
+        </li>
+      </ul>
   </ion-content>
-  <ion-footer-bar>
-      <label>
-        <input type="text" placeholder="input message" width=""/>
-      </label>
-    <button class="button">send</button>
+  <ion-footer-bar class="item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="input message" ng-model="msg.my" width=""/>
+    </label>
+    <button class="button" on-touch="sendMessage(msg)">send</button>
   </ion-footer-bar>
 </ion-view>

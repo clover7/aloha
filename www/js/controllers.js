@@ -1,31 +1,120 @@
 var app = angular.module('starter.controllers', [])
 
-app
-
-  .controller('LoginCtrl', function ($scope, $state) {
+app.controller('LoginCtrl', function ($scope, $state) {
     console.log("LoginCtrl");
-    $scope.moveMain = function () {
-      $state.go("/dash");
-    }
   })
+
   .controller('DashCtrl', function ($scope, Videos) {
     console.log("DashCtrl");
     $scope.items = Videos.all();
   })
 
-  .controller('TodoCtrl', function ($scope, $http, Todos) {
+  .controller('TodoCtrl', function ($scope, $http, Todos, $ionicLoading, $ionicPopup, $ionicModal) {
     console.log("TodoCtrl");
-    //$ionicLoading.show();
+    $ionicLoading.show();
+    function readTodo(){
+      var data = Todos.all($http);
+      console.log(data);
+      data.error(function (data, status, header, config) {
+        $ionicLoading.hide();
+        alert("error : " + status + " /" + data);
+      });
+      data.success(function (data, status, header, config) {
+        $ionicLoading.hide();
+        console.log("success : " + status + " /" + data);
+        $scope.todos = data;
+      });
+    }
 
-    var data = Todos.all($http);
-    data.error(function (data, status, header, config) {
+    readTodo();
 
-      alert("error : " + status + " /" + data);
+    $scope.updateTodo = function (todo) {
+      console.log(todo);
+      $ionicLoading.show();
+      var updated = Todos.update($http, todo);
+      updated.error(function (data, status, header, config) {
+        $ionicLoading.hide();
+        console.log("error : " + status + " /" + data);
+      });
+      updated.success(function (data, status, header, config) {
+        $ionicLoading.hide();
+        //alert("updated");
+        //console.log("updated!");
+        readTodo();
+      });
+    }
+
+    $scope.deleteTodo = function (todo) {
+      $ionicPopup.confirm({
+        title: "Delete",
+        template: "really delete???"
+      }).then(function (result) {
+        if (result) {
+          $ionicLoading.show();
+          var done = Todos.remove($http, todo);
+          done.error(function (data, status, header, config) {
+            $ionicLoading.hide();
+            console.log("error : " + status + " /" + data);
+          });
+          done.success(function (data, status, header, config) {
+            $ionicLoading.hide();
+            readTodo();
+          });
+        }
+        else {
+          alert(result);
+        }
+      });
+    }
+
+    $scope.writeTodo = function($event, todo){
+      $event.preventDefault();
+
+      console.log("$scope.title : " + $scope.title);
+      console.log("writeTodo1 : " + todo);
+      //todo = new Todos(todo);
+
+      var title = todo;
+      //console.log("writeTodo : " + title);
+
+      if(title == undefined){
+        alert("please input todo");
+        $scope.title = "";
+      }else{
+        //var todo = {"title":title, "end":false};
+        var writeDone = Todos.write($http, todo);
+        writeDone.error(function (data, status, header, config) {
+          $ionicLoading.hide();
+          alert("error : " + status + " /" + data);
+        });
+        writeDone.success(function (data, status, header, config) {
+          $ionicLoading.hide();
+          $scope.closeModal();
+          console.log("success : " + status + " /" + data);
+
+          readTodo();
+        });
+      }
+      $scope.title = "";
+    }
+
+    var baseUrl = "views/todoWrite.html";
+    $ionicModal.fromTemplateUrl(baseUrl, {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
     });
-    data.success(function (data, status, header, config) {
-      console.log("success : " + status + " /" + data);
-      $scope.todos =data;
-    });
+
+    $scope.openModal = function(){
+      $scope.modal.show();
+      //setTimeout(function(){
+      //$scope.modal.show();
+      //},100);
+    }
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
   })
 
   .controller('VideoCtrl', function ($scope, Videos) {

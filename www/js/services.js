@@ -1,8 +1,8 @@
 angular.module('starter.services', [])
 
-.factory('Todos', function () {
+  .factory('Todos', function () {
     return {
-      all: function ($http, $scope) {
+      all: function ($http) {
         var promise = $http({
           url: "https://api.mlab.com/api/1/databases/angular/collections/todos",
           method: "GET",
@@ -10,42 +10,45 @@ angular.module('starter.services', [])
             "apiKey": "0m3TAU3qpXHvc9LRN5JgYSCuZbvKS5N6"
           }
         });
-
         return promise;
       },
-
-      remove: function($http,todo){
+      remove: function ($http, todo) {
         //alert(todo._id.$oid);
         var promise = $http({
-          url: "https://api.mlab.com/api/1/databases/angular/collections/todos/"+todo._id.$oid,
+          url: "https://api.mlab.com/api/1/databases/angular/collections/todos/" + todo._id.$oid,
           method: "DELETE",
           params: {
             "apiKey": "0m3TAU3qpXHvc9LRN5JgYSCuZbvKS5N6"
           }
         });
-
-        promise.error(function (data, status, header, config) {
-          alert("error : " + status + " /" + data);
-        });
-        promise.success(function (data, status, header, config) {
-        });
+        return promise;
       },
-      update: function($http,todo){
+      update: function ($http, todo) {
+        console.log("service : " + todo);
+        todo.updateDate = new Date();
         var promise = $http({
-          url: "https://api.mlab.com/api/1/databases/angular/collections/todos/"+todo._id.$oid,
+          url: "https://api.mlab.com/api/1/databases/angular/collections/todos/" + todo._id.$oid,
           method: "PUT",
-          params:{
+          params: {
             "apiKey": "0m3TAU3qpXHvc9LRN5JgYSCuZbvKS5N6"
           },
-          data:todo
+          data: todo
         });
+        return promise;
+      },
+      write: function ($http, todo) {
+        console.log("todo write:" + todo);
+        todo.createDate = new Date();
 
-        promise.error(function(data, status, header, config){
-          alert("error :" + status + " / "+ data);
+        var promise = $http({
+          url: "https://api.mlab.com/api/1/databases/angular/collections/todos",
+          method: "POST",
+          params: {
+            "apiKey": "0m3TAU3qpXHvc9LRN5JgYSCuZbvKS5N6"
+          },
+          data: todo //서버로 넘길 데이터
         });
-        promise.success(function(data, status, header, config){
-        });
-
+        return promise;
       },
       get: function (videoId) {
         for (var i = 0; i < videos.length; i++) {

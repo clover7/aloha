@@ -1,31 +1,54 @@
 <ion-view view-title="Todos">
-
   <style>
     .item-content label,
     .item-content span{
       vertical-align: middle;
     }
+    .item-content span{
+      margin-left:10px;
+    }
   </style>
 
+  <ion-nav-buttons side="right">
+    <button class="button ion-edit" on-touch="openModal()"></button>
+  </ion-nav-buttons>
   <!-- ion-content : 가변크기, scrolling 된다 -->
-
   <ion-content>
+    <div class="item item-divider">
+      Plan
+    </div>
     <ion-list>
-      <ion-item ng-repeat="todo in todos">
+      <ion-item ng-repeat="todo in todos |orderBy:'-updateDate'|filter:false">
         <label class="toggle toggle-assertive">
-          <input type="checkbox" ng-model="todo.end"/>
+          <input type="checkbox" ng-model="todo.end" ng-change="updateTodo(todo)"/>
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
-        {{todo.title}}
-        <ion-option-button class="button-assertive">delete</ion-option-button>
+        <span>
+          {{todo.title}}
+        </span>
+        <p class="text-right" style="font-size:7pt;">createDate : {{todo.createDate|date:"yyyy.MM.dd."}} / updateDate : {{todo.updateDate|date:"yyyy.MM.dd."}}</p>
+        <ion-option-button class="button-assertive" on-touch="deleteTodo(todo)">delete</ion-option-button>
       </ion-item>
     </ion-list>
-    <!--&lt;!&ndash;<button class="button"> button </button>&ndash;&gt;-->
-    <!--&lt;!&ndash;<a href=""  class="button">a button</a>&ndash;&gt;-->
+      <div class="item item-divider">
+        Done
+      </div>
+    <ion-list>
+      <ion-item ng-repeat="todo in todos |orderBy:'-updateDate'|filter:true">
+        <label class="toggle toggle-assertive">
+          <input type="checkbox" ng-model="todo.end" ng-change="updateTodo(todo)"/>
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+        <span>
+          {{todo.title}}
+        </span>
+        <p class="text-right" style="font-size:7pt;">createDate : {{todo.createDate|date:"yyyy.MM.dd."}} / updateDate : {{todo.updateDate|date:"yyyy.MM.dd."}}</p>
+        <ion-option-button class="button-assertive" on-touch="deleteTodo(todo)">delete</ion-option-button>
+      </ion-item>
+    </ion-list>
   </ion-content>
-  <ion-footer-bar class="row-no-padding">
-    <button class="button-block row-no-padding">write</button>
-  </ion-footer-bar>
 </ion-view>

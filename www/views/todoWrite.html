@@ -1,0 +1,21 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-positive">
+    <h2 class="title"> write todo</h2>
+    <button class="button ion-ios-close" on-touch="closeModal()"></button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <ion-list class="row-wrap">
+      <form ng-submit="writeTodo($event, todo)">
+      <label class="item item-input">
+        <!--<span class="input-label">todo list</span>-->
+        <input ng-model="todo.title" id="title" type="text"/>
+        <button class="button button-positive ion-ios-checkmark">
+          write
+        </button>
+      </label>
+      </form>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>
+
+

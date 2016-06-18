@@ -1,9 +1,22 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope) {
+  console.log("DashCtrl");
+})
 
   .controller('TodoCtrl', function($scope) {
+      console.log("TodoCtrl");
+  })
+  .controller('VideoCtrl', function($scope, Videos) {
+    $scope.items = Videos.all();
 
+    $scope.remove = function(video) {
+      Videos.remove(video);
+    };
+  })
+
+  .controller('VideoDetailCtrl', function($scope, $stateParams, Videos) {
+    $scope.item = Videos.get($stateParams.itemId);
   })
 
   .controller('ChatsCtrl', function($scope, Chats) {

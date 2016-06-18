@@ -1,8 +1,13 @@
 <ion-view title="Login" id="page5" class=" ">
   <ion-content padding="true" class="has-header">
-    <div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">
-      <i class="icon ion-image" style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;"></i>
-    </div>
+    <!--<div style="margin: 0px; line-height: 250px; text-align: center; background-color: rgb(232, 235, 239);">-->
+      <!--&lt;!&ndash;<i class="icon ion-image"&ndash;&gt;-->
+         <!--&lt;!&ndash;style="font-size: 64px; color: rgb(136, 136, 136); vertical-align: middle;">&ndash;&gt;-->
+
+      <!--&lt;!&ndash;</i>&ndash;&gt;-->
+      <!---->
+    <!--</div>-->
+    <img src="../img/002.gif" class="full-size">
     <form id="login-form1" class="list ">
       <ion-list id="login-list1" class=" ">
         <label class="item item-input " id="login-input1">
@@ -15,8 +20,17 @@
         </label>
       </ion-list>
       <div class="spacer" style="height: 40px;"></div>
-      <a ui-sref="page" id="login-button1" class=" button button-stable  button-block ">Log in</a>
-      <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2" class=" button button-positive  button-block button-clear ">Or create an account</a>
+      <a ui-sref="page" id="login-button1" class=" button button-stable  button-block " on-touch="moveMain()">Log in</a>
+      <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2"
+         class=" button button-positive  button-block button-clear ">Or create an account</a>
     </form>
   </ion-content>
-</ion-view>
+  <!---->
+<!--</ion-view>-->
+
+<!--&lt;!&ndash;<ion-view title="Login">&ndash;&gt;-->
+<!--&lt;!&ndash;<ion-content>&ndash;&gt;-->
+<!--&lt;!&ndash;<h2> 로그인</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;</ion-content>&ndash;&gt;-->
+
+<!--</ion-view>-->

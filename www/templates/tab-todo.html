@@ -1,9 +1,31 @@
 <ion-view view-title="Todos">
-  <!-- ion-content : 가변크기, scrolling 된다 -->
-  <ion-content class="padding">
-    <h2>TodoList</h2>
 
-    <button class="button"> button </button>
-    <a href=""  class="button">a button</a>
+  <style>
+    .item-content label,
+    .item-content span{
+      vertical-align: middle;
+    }
+  </style>
+
+  <!-- ion-content : 가변크기, scrolling 된다 -->
+
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="todo in todos">
+        <label class="toggle toggle-assertive">
+          <input type="checkbox" ng-model="todo.end"/>
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+        {{todo.title}}
+        <ion-option-button class="button-assertive">delete</ion-option-button>
+      </ion-item>
+    </ion-list>
+    <!--&lt;!&ndash;<button class="button"> button </button>&ndash;&gt;-->
+    <!--&lt;!&ndash;<a href=""  class="button">a button</a>&ndash;&gt;-->
   </ion-content>
+  <ion-footer-bar class="row-no-padding">
+    <button class="button-block row-no-padding">write</button>
+  </ion-footer-bar>
 </ion-view>

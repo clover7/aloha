@@ -43,7 +43,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
+
+    .state('login', {
+      url: '/login',
+      //abstract: true, //추상화 페이지라 접근 불가능함
+      templateUrl: 'views/login.html'
+    })
+
+    // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
     abstract: true, //추상화 페이지라 접근 불가능함
@@ -120,6 +127,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
 
   //기본시작할때 경로
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/login');
 
 });

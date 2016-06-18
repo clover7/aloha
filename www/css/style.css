@@ -1,4 +1,10 @@
 /* Empty. Add your own CSS if you like */
+
+.item-content label,
+.item-content span{
+  vertical-align: middle;
+}
+
 li.msg {
   padding: 10px;
   position: relative;

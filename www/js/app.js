@@ -7,13 +7,18 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform,$rootScope) {
+.run(function($ionicPlatform,$rootScope, $state) {
+  // $state : 상태처리
   //tabHide지정 후 기본은 false
-  $rootScope.tabHide = false;
 
   //ionic view event
   $rootScope.$on("$ionicView.beforeEnter", function(){
-    alert("beforeEnter");
+    console.log("beforeEnter");
+    //alert($state.current.name); //현재 상태를 받는다
+    var currentLocation = $state.current.name;
+    $rootScope.tabHide = false;
+    if(currentLocation =="tab.video-detail" || currentLocation =="tab.chat-detail" )
+      $rootScope.tabHide = true;
   })
 
   $ionicPlatform.ready(function() {

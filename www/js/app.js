@@ -42,8 +42,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
-
     .state('login', {
       url: '/login',
       //abstract: true, //추상화 페이지라 접근 불가능함
@@ -87,7 +85,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     })
     .state('tab.video-detail', {
-      url: '/videos/:itemId',
+      url: '/videos/:videoId',
       views: {
         'tab-videos': {
           templateUrl: 'templates/video-detail.html',
@@ -105,7 +103,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     })
     .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+      url: '/chats/:itemId',
       views: {
         'tab-chats': {
           templateUrl: 'templates/chat-detail.html',

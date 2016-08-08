@@ -139,10 +139,10 @@ app.controller('LoginCtrl', function ($scope, $state) {
     };
   })
 
-  .controller('VideoCtrl', function ($scope, Videos, $firebaseArray) {
-    $scope.items = Videos.all();
+  .controller('ChatsCtrl', function ($scope, Chats, $firebaseArray) {
+    $scope.items = Chats.all();
     $scope.remove = function (video) {
-      Videos.remove(video);
+      Chats.remove(video);
     };
 
     var messagesRef = new Firebase("https://aloha-651ec.firebaseio.com/aloha");
@@ -164,8 +164,8 @@ app.controller('LoginCtrl', function ($scope, $state) {
 
   })
 
-  .controller('VideoDetailCtrl', function ($scope, $stateParams, Videos, $ionicScrollDelegate) {
-    $scope.item = Videos.get($stateParams.itemId);
+  .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats, $ionicScrollDelegate) {
+    $scope.item = Chats.get($stateParams.itemId);
     //
     //function($scope, $ionicHistory, $firebaseArray, $cordovaCamera, $firebase, $ionicScrollDelegate) {
     //
@@ -204,7 +204,7 @@ app.controller('LoginCtrl', function ($scope, $state) {
     }
   })
 
-  .controller('ChatsCtrl', function ($scope, Chats) {
+  .controller('VideoCtrl', function ($scope, Videos) {
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -213,14 +213,14 @@ app.controller('LoginCtrl', function ($scope, $state) {
     //$scope.$on('$ionicView.enter', function(e) {
     //});
 
-    $scope.chats = Chats.all();
-    $scope.remove = function (chat) {
-      Chats.remove(chat);
+    $scope.videos = Videos.all();
+    $scope.remove = function (video) {
+      Videos.remove(video);
     };
   })
 
-  .controller('ChatDetailCtrl', function ($scope, $stateParams, Chats) {
-    $scope.chat = Chats.get($stateParams.chatId);
+  .controller('VideoDetailCtrl', function ($scope, $stateParams, Videos) {
+    $scope.video = Videos.get($stateParams.videoId);
   })
 
   .controller('AccountCtrl', function ($scope) {

@@ -50,23 +50,22 @@ angular.module('starter.services', [])
         });
         return promise;
       },
-      get: function (videoId) {
-        for (var i = 0; i < videos.length; i++) {
-          if (videos[i].id === parseInt(videoId)) {
-            return videos[i];
-          }
-        }
-        return null;
-      }
+      //get: function (videoId) {
+      //  for (var i = 0; i < videoId.length; i++) {
+      //    if (videos[i].id === parseInt(videoId)) {
+      //      return videoId[i];
+      //    }
+      //  }
+      //  return null;
+      //}
     };
   })
 
-
-  .factory('Videos', function () {
+  .factory('Chats', function () {
 
     //var itemsRef = new Firebase("https://Aloha.firebaseio.com/items");
     //return $firebaseArray(itemsRef);
-    var videos = [{
+    var chats = [{
       id: 0,
       name: 'Ben Sparrow',
       lastText: 'You on your way?',
@@ -136,33 +135,15 @@ angular.module('starter.services', [])
 
     return {
       all: function () {
-        return videos;
+        return chats;
       },
-      remove: function (video) {
-        videos.splice(videos.indexOf(video), 1);
+      remove: function (chat) {
+        chats.splice(chats.indexOf(chat), 1);
       },
-      write: function ($http, todo) {
-        console.log("todo write:" + todo);
-        todo.createDate = new Date();
-        $scope.items.$add({
-          "name": name
-        });
-
-
-        var promise = $http({
-          url: "https://api.mlab.com/api/1/databases/angular/collections/todos",
-          method: "POST",
-          params: {
-            "apiKey": "0m3TAU3qpXHvc9LRN5JgYSCuZbvKS5N6"
-          },
-          data: todo //서버로 넘길 데이터
-        });
-        return promise;
-      },
-      get: function (videoId) {
-        for (var i = 0; i < videos.length; i++) {
-          if (videos[i].id === parseInt(videoId)) {
-            return videos[i];
+      get: function (chatId) {
+        for (var i = 0; i < chats.length; i++) {
+          if (chats[i].id === parseInt(chatId)) {
+            return chats[i];
           }
         }
         return null;
@@ -170,11 +151,11 @@ angular.module('starter.services', [])
     };
   })
 
-  .factory('Chats', function () {
+  .factory('Videos', function () {
     // Might use a resource here that returns a JSON array
 
     // Some fake testing data
-    var chats = [{
+    var videos = [{
       id: 0,
       name: 'Ben Sparrow',
       lastText: 'You on your way?',
@@ -208,15 +189,15 @@ angular.module('starter.services', [])
 
     return {
       all: function () {
-        return chats;
+        return videos;
       },
-      remove: function (chat) {
-        chats.splice(chats.indexOf(chat), 1);
+      remove: function (video) {
+        videos.splice(videos.indexOf(video), 1);
       },
-      get: function (chatId) {
-        for (var i = 0; i < chats.length; i++) {
-          if (chats[i].id === parseInt(chatId)) {
-            return chats[i];
+      get: function (videoId) {
+        for (var i = 0; i < videos.length; i++) {
+          if (videos[i].id === parseInt(videoId)) {
+            return videos[i];
           }
         }
         return null;

@@ -4,11 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
-
-
     <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
-
     <!-- kakao font -->
     <link href="css/kakao.font.css" ref="stylesheet">
 
@@ -18,13 +15,13 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+    <!-- cordova script (this will be a 404 during development)
+    <script src="cordova.js"></script>-->
 
     <!-- your app's js -->
     <style>
       body{
-        cursor: url(img/finger.png),default;
+        cursor: url('img/finger.png'),default;
       }
     </style>
     <script src="js/app.js"></script>
@@ -46,6 +43,9 @@
       <!--firebase.initializeApp(config);-->
 <!--//    </script>-->
 
+    <!-- webrtc -->
+    <script src="lib/webrtc/adapter.js"></script>
+
 
   </head>
   <body ng-app="starter">
@@ -63,4 +63,6 @@
     -->
     <ion-nav-view></ion-nav-view>
   </body>
+
+  <!--<script src="lib/webrtc/adapter.js"></script>-->
 </html>

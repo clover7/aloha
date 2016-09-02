@@ -5,34 +5,123 @@
   The Friends service returns an array of friend data
 -->
 
+
+
 <ion-view view-title="{{video.name}}">
   <i class="icon ion-chevron-right icon-accessory"></i>
   <style>
-    video {width:100%;}
+    .videoScreen{
+      vertical-align: middle;
+      text-align: center;
+      border: 1px solid #8f8f8f;
+    }
 
+    .video{
+      /*background-image: url("../img/adam.jpg");*/
+      background-size:cover;
+      background-repeat: no-repeat;
+      width:100%;
+      /*height:399px;*/
+      position: relative;
+    }
+
+    video{width:100%; }
+
+    #context{position: relative;}
+
+    .acceptCall{
+      margin-left: 70%;
+      width:30%;
+      bottom:90px;
+      right:10px;
+    }
+
+    button{
+      margin:0 10px;
+    }
+
+    #calleeImg{
+      margin: 10px;
+      /*float:left;*/
+      width: 70px;
+      background: rgba(30, 144, 255, 0.67);
+      -moz-border-radius: 50px;
+      -webkit-border-radius: 50px;
+      border-radius: 50px;
+    }
+    /*#calleeName{float:right;}*/
+
+    #footer{
+      padding: 20px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 4%;
+    }
+
+    #header{
+      height: 40px;
+      border: 1px solid #fff;
+      position: relative;
+      width: 100%;
+    }
+
+    .call-accept{
+      text-align: left;
+      background-color: rgba(113, 113, 113, 0.68);
+    }
+
+    #header>span{
+      position: absolute;
+      margin: 10px;
+      left: 0;
+      right: 0;
+    }
+
+    div{margin: auto 0;}
+
+    /*shape*/
+    .circle {
+      width:  70px;
+      height: 70px;
+      background: rgba(30, 144, 255, 0.67);
+      -moz-border-radius: 50px;
+      -webkit-border-radius: 50px;
+      border-radius: 50px;
+    }
+
+    .red{
+      background: rgba(255, 21, 142, 0.62);
+      /*rgba(126, 51, 65, 0.63);*/
+    }
+    .white{
+      color: #fff;
+    }
 
   </style>
+  <script>
+
+  </script>
   <ion-content class="padding">
-    <!--<img ng-src="{{video.face}}" style="width: 64px; height: 64px">-->
+    <div id="video" class="videoScreen">
+      <div id="header">
+        <h5>hello!! :-)</h5>
+        <p> {{video.lastText}}</p>
+        <div>
+          <img id="calleeImg" ng-src="{{video.face}}" class="circle">
+          <span id="calleeName" class="whites"> calling {{video.name}}....</span>
 
-    <div>
-      <!--<video autoplay></video>-->
-
-      <h5>hello!! :-)</h5>
-      <p>
-        {{video.lastText}}
-      </p>
-
-      <div>
-      <button id="startButton">Start</button>
-      <button id="callButton">Call</button>
-      <button id="hangupButton">Hang Up</button>
+        </div>
+      </div>
+      <div id="context">
+        <video id="remoteVideo" autoplay></video>
+        <video id="localVideo"  autoplay></video>
       </div>
     </div>
-
-    <div>
-      <video id="localVideo" autoplay></video>
-      <video id="remoteVideo" autoplay></video>
+    <div id="footer" class="videoScreen">
+      <h3 id="callTime">00:00:30</h3>
+      <button id="callButton" name="accept" class="circle"><i class="fa fa-video-camera fa-3x white" aria-hidden="true"></i></button>
+      <button id="hangupButton" name="end" class="circle red"> <i class="fa fa-phone fa-3x white" aria-hidden="true"></i> </button>
     </div>
 
   </ion-content>
